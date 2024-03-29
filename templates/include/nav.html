@@ -1,0 +1,20 @@
+<nav>
+  <ul class="collection">
+    {% for path, name in {"/blog/": "Blog", "/projects/": "Projects"}.items() %}
+
+    <li>
+      {% if path.strip() == request.url.path.strip() %}
+      <a href="{{path}}" class="current-page">{{name}}</a>
+      {% else %}
+      <a href="{{path}}" class="other-page">{{name}}</a>
+      {% endif %}
+    </li>
+    {% endfor %}
+    <li class="last">
+      <label class="switch">
+        <input id="light" name="light-mode" type="checkbox">
+        <span class="slider round"></span>
+      </label>
+    </li>
+  </ul>
+</nav>

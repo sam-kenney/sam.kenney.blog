@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'include/head.html' %}
+
+<body>
+  <section class="squish">
+    {% include 'include/nav.html' %}
+  </section>
+
+  <section class="intro">
+    <p>Hey!</p>
+    <p>I'm Sam. I'm a Data Engineer and I play guitar sometimes</p>
+    <p>I make some silly projects in my spare time,
+      like the <a href="https://github.com/sam-kenney/static_router">tooling</a> I used to make this blog! I'll
+      get around to writing about it all one day...
+      Until then, enjoy what's here :&rpar;
+    </p>
+  </section>
+
+  <section class="squish">
+    {% for year, posts_g in posts.items() | sort | reverse %}
+    <h2>{{year}}</h2>
+    {% for post in posts_g | sort(attribute="date") | reverse %}
+    <span class="blog-item">
+      <p><a href="{{post.path}}">{{post.title}}</a></p>
+      <p class="date">{{post.date.strftime("%d")}} {{post.date.strftime("%B")}}</p>
+    </span>
+    {% endfor %}
+    {% endfor %}
+  </section>
+  {% include 'include/scripts.html' %}
+</body>
+
+</html>

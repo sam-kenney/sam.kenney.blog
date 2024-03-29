@@ -1,0 +1,51 @@
+[tool.poetry]
+name = "sam.kenney.blog"
+version = "0.1.0"
+description = ""
+authors = ["Sam Kenney <sam.kenney@me.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+static-router = "^0.1.0"
+fastapi = "^0.110.0"
+uvicorn = "^0.29.0"
+httpx = "^0.27.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "*"
+mypy = "*"
+pre-commit = "*"
+pytest = "*"
+ruff = "*"
+
+[tool.ruff]
+line-length = 88
+select = ["ALL"]
+# Comments describe what disabling the rule allows for
+ignore = [
+    "A003",    # Allow shadowing builtins (e.g. `id`, `list`) on classes
+    "ANN101",  # Don't annotate `self` on instance methods
+    "ANN102",  # Don't annotate `cls` on class methods
+    "ANN401",  # Allow annotating with `Any` (e.g. `def foo(**kwargs: Any):...`)
+    "D203",    # Require no blank lines before class docstring
+    "D212",    # Require starting multi-line docstring on a new line
+    "EM101",   # Allow raw string literals as exception messages
+    "EM102",   # Allow f-strings as exception messages
+    "TID252",  # Allow for relative imports
+    "TRY003",  # Allow specifying messages inside the exception class
+    "PTH123",  # Allow for use of `open` method
+    "PLR0913", # Allows for more than 5 args to a function
+]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["D104"]    # Allow for empty __init__.py files
+"**/*/test_*.py" = ["S101"] # Allow asserts in tests
+
+[tool.mypy]
+exclude = ["venv"]
+ignore_missing_imports = true # Not all libraries have stubs yet, so silence errors
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

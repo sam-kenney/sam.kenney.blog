@@ -1,0 +1,9 @@
+*.env
+.github/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.editorconfig
+.env.template
+.gitignore
+.pre-commit-config.yaml
