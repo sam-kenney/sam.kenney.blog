@@ -112,6 +112,11 @@ h3 {
 pre {
   margin-bottom: 20px;
   overflow: scroll;
+  padding: 10px;
+}
+
+div.codehilite {
+  border-radius: 5px;
 }
 
 .spacer {
