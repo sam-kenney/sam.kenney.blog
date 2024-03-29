@@ -48,6 +48,8 @@ def projects(request: fastapi.Request) -> fastapi.Response:
         name="projects.html",
         context={
             "request": request,
+            "projects": request.app.state.projects,
+            "title": "Projects",
         },
     )
 

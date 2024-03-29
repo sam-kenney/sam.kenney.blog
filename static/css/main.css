@@ -189,6 +189,15 @@ input:checked+.slider:before {
   --faded: #1119;
 }
 
+.title {
+  font-size: large;
+}
+
+.description {
+  font-size: small;
+  color: var(--faded)
+}
+
 @media screen and (max-width: 1450px) and (min-width: 600px) {
   section.squish {
     max-width: 60%;

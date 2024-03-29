@@ -5,8 +5,33 @@
 <body>
   <section class="squish">
     {% include 'include/nav.html' %}
+  </section>
 
-    <h1>Coming soon!</h1>
+  <section class="intro">
+    <p>Hey there!</p>
+    <p>
+      You can find links to all of my GitHub projects here.
+      Feel free to follow or drop a star if you find anything cool! And
+      of course, contributions are always welcome :&rpar;
+    </p>
+  </section>
+
+  <section class="squish">
+    {% for year, repos in projects.items() | sort | reverse %}
+    <h1>{{year}}</h1>
+    {% for project in repos | sort(attribute="pushed_at") | reverse %}
+    <section class="github-repo">
+      <span class="blog-item">
+        <a href="{{project.html_url}}">
+          <p class="title">{{project.name}}</p>
+        </a>
+        <p class="date">{{project.pushed_at.strftime("%d")}} {{project.pushed_at.strftime("%B")}}</p>
+      </span>
+
+      <p class="description">{{project.description or ""}}</p>
+    </section>
+    {% endfor %}
+    {% endfor %}
   </section>
   {% include 'include/scripts.html' %}
 </body>

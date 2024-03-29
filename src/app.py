@@ -11,6 +11,7 @@ from fastapi.templating import Jinja2Templates
 from static_router import StaticRouter
 
 from src.contentful import Contentful
+from src.github import GitHub
 from src.routes import not_found, router
 
 if TYPE_CHECKING:
@@ -24,8 +25,13 @@ async def lifespan(app: fastapi.FastAPI) -> AsyncIterator[None]:
     app.state.static = StaticRouter(content_loader=content_loader)
     app.state.static.register(app)
     app.state.templates = Jinja2Templates("templates")
+
+    gh = GitHub("sam-kenney")
+    app.state.projects = await gh.list_projects()
+
     yield
 
+    await gh.close()
 
 def make_app() -> fastapi.FastAPI:
     """Initialise the app."""
