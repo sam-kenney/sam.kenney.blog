@@ -33,6 +33,7 @@ async def lifespan(app: fastapi.FastAPI) -> AsyncIterator[None]:
 
     await gh.close()
 
+
 def make_app() -> fastapi.FastAPI:
     """Initialise the app."""
     app = fastapi.FastAPI(

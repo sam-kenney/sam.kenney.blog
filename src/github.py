@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
-import os
+from typing import TYPE_CHECKING
 
 import httpx
 import pydantic
-from datetime import datetime
+
+if TYPE_CHECKING:
+    from datetime import datetime
 
 
 class GitHubProject(pydantic.BaseModel, extra=pydantic.Extra.ignore):
@@ -35,7 +37,7 @@ class GitHub:
         self.user = user
 
         self.http = httpx.AsyncClient(
-            base_url=f"https://api.github.com/",
+            base_url="https://api.github.com/",
             headers={
                 "Accept": "application/vnd.github+json",
                 "X-GitHub-Api-Version": "2022-11-28",
@@ -53,7 +55,7 @@ class GitHub:
             params={
                 "state": "open",
                 "per_page": 100,
-            }
+            },
         )
         response.raise_for_status()
 
