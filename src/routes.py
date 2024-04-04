@@ -41,8 +41,10 @@ def blog(request: fastapi.Request) -> fastapi.Response:
 
 
 @router.get("/projects/")
-def projects(request: fastapi.Request) -> fastapi.Response:
+async def projects(request: fastapi.Request) -> fastapi.Response:
     """Return the projects page."""
+    if not getattr(request.app.state, "projects", None):
+        request.app.state.projects = await request.app.state.gh.list_projects()
     return request.app.state.templates.TemplateResponse(
         request=request,
         name="projects.html",

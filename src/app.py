@@ -25,13 +25,11 @@ async def lifespan(app: fastapi.FastAPI) -> AsyncIterator[None]:
     app.state.static = StaticRouter(content_loader=content_loader)
     app.state.static.register(app)
     app.state.templates = Jinja2Templates("templates")
-
-    gh = GitHub("sam-kenney")
-    app.state.projects = await gh.list_projects()
+    app.state.gh = GitHub("sam-kenney")
 
     yield
 
-    await gh.close()
+    await app.state.gh.close()
 
 
 def make_app() -> fastapi.FastAPI:

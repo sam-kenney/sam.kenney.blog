@@ -2,13 +2,10 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from datetime import datetime  # noqa: TCH003
 
 import httpx
 import pydantic
-
-if TYPE_CHECKING:
-    from datetime import datetime
 
 
 class GitHubProject(pydantic.BaseModel, extra=pydantic.Extra.ignore):
